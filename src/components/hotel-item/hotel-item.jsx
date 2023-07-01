@@ -19,7 +19,7 @@ const HotelItem = ({ hotel, main }) => {
 
   const handlerFavorite = () => {
     if (!hotel?.favorite) {
-      dispatch({ type: ADD_FAVORITES_HOTEL, payload: hotel?.hotelId });
+      dispatch({ type: ADD_FAVORITES_HOTEL, payload: hotel });
     } else {
       dispatch({ type: DELETE_FAVORITES_HOTEL, payload: hotel?.hotelId });
     }

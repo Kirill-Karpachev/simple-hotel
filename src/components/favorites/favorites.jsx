@@ -4,8 +4,10 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const Favorites = () => {
-  const { hotel } = useSelector((store) => store.hotel);
+  const { hotel, favoritesHotel } = useSelector((store) => store.hotel);
   const [sort, setSort] = useState("default");
+
+  console.log(favoritesHotel);
 
   const handleChange = (e) => {
     setSort(e.target.value);
@@ -26,7 +28,7 @@ const Favorites = () => {
 
       <ul className={styles.list}>
         {sort === "default"
-          ? [...hotel]
+          ? favoritesHotel
               .sort((a, b) => b?.stars - a?.stars)
               .map((hotel) =>
                 hotel.favorite ? (
