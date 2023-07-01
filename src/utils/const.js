@@ -1,9 +1,7 @@
 import {
   dateFormat
 } from "./util";
-
 const currentDate = new Date()
-
 export const HOTEL_API = "http://engine.hotellook.com/api/v2/cache.json";
 export const defaultLocation = {
   location: "Москва",
@@ -11,5 +9,3 @@ export const defaultLocation = {
   checkOut: dateFormat(currentDate.setDate(currentDate.getDate() + 1)),
   day: "1",
 }
-
-export const patternPassword = /^[a-zA-Z0-9]+$/;

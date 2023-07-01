@@ -57,7 +57,7 @@ const HotelItem = ({ hotel, main }) => {
 
           <div className={styles.middle}>
             <p className={styles.text}>
-              {parseDate(formHotel?.checkIn || "2022-06-23")}
+              {parseDate(formHotel?.checkIn)}
             </p>
             —<p className={styles.text}>{formHotel?.day} день</p>
           </div>
