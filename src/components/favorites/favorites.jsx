@@ -11,6 +11,14 @@ const Favorites = () => {
     setSort(e.target.value);
   };
 
+  const sortedHotels = favoritesHotel.filter((hotel) => hotel.favorite);
+
+  if (sort === "default") {
+    sortedHotels.sort((a, b) => b.stars - a.stars);
+  } else if (sort === "price") {
+    sortedHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+  }
+
   return (
     <div className={styles.favorites}>
       <h2 className={styles.title}>Избранное</h2>
@@ -25,21 +33,9 @@ const Favorites = () => {
       </select>
 
       <ul className={styles.list}>
-        {sort === "default"
-          ? favoritesHotel
-              .sort((a, b) => b?.stars - a?.stars)
-              .map((hotel) =>
-                hotel.favorite ? (
-                  <HotelItem key={hotel.hotelId} hotel={hotel} />
-                ) : null
-              )
-          : favoritesHotel
-              .sort((a, b) => b?.priceAvg - a?.priceAvg)
-              .map((hotel) =>
-                hotel.favorite ? (
-                  <HotelItem key={hotel.hotelId} hotel={hotel} />
-                ) : null
-              )}
+        {sortedHotels.map((hotel) => (
+          <HotelItem key={hotel.hotelId} hotel={hotel} />
+        ))}
       </ul>
     </div>
   );

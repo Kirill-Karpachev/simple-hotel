@@ -60,7 +60,7 @@
   flex-direction: column;
   gap: 16px;
   max-height: 51vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .list::-webkit-scrollbar {
