@@ -4,6 +4,10 @@ import {
 } from "../actions/user";
 
 const initialState = {
+  user: {
+    email: '',
+    password: '',
+  },
   isAuth: false,
 };
 
@@ -12,12 +16,20 @@ export const userReducer = (state = initialState, action) => {
     case AUTH: {
       return {
         ...state,
+        user: {
+          email: action.payload?.email,
+          password: action.payload?.password
+        },
         isAuth: true,
       };
     }
     case UN_AUTH: {
       return {
         ...state,
+        user: {
+          email: "",
+          password: ""
+        },
         isAuth: false,
       }
     }

@@ -1,3 +1,12 @@
+import {
+  format,
+  parse
+} from "date-fns";
+import {
+  ru
+} from 'date-fns/locale'
+
+
 export function getCookie(name) {
   const matches = document.cookie.match(
     new RegExp(
@@ -37,3 +46,12 @@ export function deleteCookie(name) {
     expires: -1,
   });
 }
+
+export const dateFormat = (date) => format(date, "yyyy-MM-dd");
+export const checkOut = (date, day) => dateFormat(date.setDate(date.getDate() + Number(day)));
+export const parseDate = (date) => format(parse(date, 'yyyy-MM-dd', new Date(), {
+  locale: ru
+}), 'dd MMMM yyyy', {
+  locale: ru
+})
+

@@ -1,13 +1,17 @@
 import {
   GET_HOTEL_REQUEST,
   GET_HOTEL_SUCCESS,
-  GET_HOTEL_FAILED
+  GET_HOTEL_FAILED,
+  ADD_FAVORITES_HOTEL,
+  DELETE_FAVORITES_HOTEL
 } from "../actions/hotel";
 
 const initialState = {
-  hotel: null,
+  hotel: [],
+  formHotel: null,
   hotelRequest: false,
   hotelFailed: false,
+  favoritesHotel: []
 };
 
 export const hotelReducer = (state = initialState, action) => {
@@ -21,7 +25,8 @@ export const hotelReducer = (state = initialState, action) => {
     case GET_HOTEL_SUCCESS: {
       return {
         ...state,
-        hotel: action.payload,
+        hotel: action.payload.data,
+        formHotel: action.payload.form,
         hotelRequest: false,
         hotelFailed: false,
       }
@@ -32,6 +37,32 @@ export const hotelReducer = (state = initialState, action) => {
         hotelRequest: false,
         hotelFailed: true,
       }
+    }
+    case ADD_FAVORITES_HOTEL: {
+      return {
+        ...state,
+        hotel: [...state.hotel].map(hotel => (
+          hotel.hotelId === action.payload ? {
+            ...hotel,
+            favorite: true
+          } : hotel
+        )),
+        favoritesHotel: [...state.favoritesHotel, action.payload]
+      }
+    }
+    case DELETE_FAVORITES_HOTEL: {
+      return {
+        ...state,
+        hotel: [...state.hotel].map(hotel => (
+          hotel.hotelId === action.payload ? {
+            ...hotel,
+            favorite: false
+          } : hotel
+        )),
+        favoritesHotel: [...state.favoritesHotel].filter(
+          (hotel) => hotel !== action.payload
+        ),
+      };
     }
     default: {
       return state;

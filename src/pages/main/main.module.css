@@ -1,0 +1,53 @@
+.bg {
+  height: 100vh;
+  background: #F4F4F4 center center no-repeat fixed;
+  background-size: cover;
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 32px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 28px;
+  letter-spacing: 0em;
+  color: #424242;
+  margin: 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #41522E;
+  border: 0;
+  cursor: pointer;
+  background: 0;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 24px;
+  max-width: 1048px;
+  margin: 0 auto;
+}
+
+.sidePanels {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+}

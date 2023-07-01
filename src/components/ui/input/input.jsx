@@ -1,24 +1,18 @@
-import { useState } from "react";
 import styles from "./input.module.css";
 
-const Input = ({ text, type, ...rest }) => {
-  const [err, serErr] = useState(false);
-  const handleErr = () => {
-    serErr(false);
-  };
-
+const Input = ({ text, type, err, ...rest }) => {
   return (
-    <label className={styles.label}>
+    <label className={`${styles.label} ${err ? styles.labelErr : ""}`}>
       {text}
       <input
-        className={styles.input}
+        className={`${styles.input} ${err ? styles.inputErr : ""}`}
         type={type}
-        onClick={handleErr}
         {...rest}
+        required
       />
       {err && (
-        <span className={styles.err}>
-          {type === "email" ? "Email" : "Password"} неверный
+        <span className={`${styles.err} ${err.err ? styles.active : ""}`}>
+          {err}
         </span>
       )}
     </label>

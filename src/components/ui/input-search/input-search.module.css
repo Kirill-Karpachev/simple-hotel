@@ -1,15 +1,10 @@
 .label {
   display: flex;
   flex-direction: column;
-  min-width: 345px;
   color: #424242;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 500;
   position: relative;
-}
-
-.labelErr {
-  color: #EB1717;
 }
 
 .input {
@@ -21,16 +16,4 @@
   font-size: 16px;
   line-height: 18px;
   font-weight: 300;
-}
-
-.inputErr {
-  border-color: #EB1717;
-  color: #EB1717;
-}
-
-.err {
-  position: absolute;
-  font-size: 12px;
-  color: #EB1717;
-  bottom: -24%;
 }

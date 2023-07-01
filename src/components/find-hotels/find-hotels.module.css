@@ -1,0 +1,76 @@
+.findHotels {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.location {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.textBlock {
+  display: flex;
+  gap: 20px;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 38px;
+  letter-spacing: 0em;
+  color: #424242;
+  align-items: baseline;
+}
+
+.text {
+  margin: 0;
+}
+
+.date {
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0px;
+  color: #41522E;
+  margin: 0;
+}
+
+.favorites {
+  margin: 0;
+  margin-bottom: 20px;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 22px;
+  color: #424242;
+}
+
+.number {
+  font-weight: 500;
+  color: #41522E;
+}
+
+.list {
+  padding: 0 14px 0 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-height: 51vh;
+  overflow-y: scroll;
+}
+
+.list::-webkit-scrollbar {
+  width: 2px;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #41522E;
+  height: 10px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #E7E7E7;
+}
