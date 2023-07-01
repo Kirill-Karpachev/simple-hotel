@@ -18,4 +18,5 @@ const Input = ({ text, type, err, ...rest }) => {
     </label>
   );
 };
+
 export default Input;

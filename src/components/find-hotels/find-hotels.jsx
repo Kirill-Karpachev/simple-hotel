@@ -4,6 +4,7 @@ import HotelItem from "../hotel-item/hotel-item";
 import CarouselImg from "../carousel/carousel";
 import { useSelector } from "react-redux";
 import { parseDate } from "../../utils/util";
+import { defaultLocation } from "../../utils/const";
 
 const FindHotels = () => {
   const { hotel, favoritesHotel, formHotel } = useSelector((store) => store.hotel);
@@ -16,7 +17,7 @@ const FindHotels = () => {
           <img src={Arrow} alt="Стрелка" />
           <p className={styles.text}>{formHotel?.location}</p>
         </div>
-        <p className={styles.date}>{parseDate(formHotel?.checkIn || '2022-06-23')}</p>
+        <p className={styles.date}>{parseDate(formHotel?.checkIn || defaultLocation.checkIn)}</p>
       </div>
 
       <CarouselImg />

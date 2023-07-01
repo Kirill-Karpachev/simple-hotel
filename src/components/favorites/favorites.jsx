@@ -4,12 +4,20 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const Favorites = () => {
-  const { hotel } = useSelector((store) => store.hotel);
+  const { favoritesHotel } = useSelector((store) => store.hotel);
   const [sort, setSort] = useState("default");
 
   const handleChange = (e) => {
     setSort(e.target.value);
   };
+
+  const sortedHotels = favoritesHotel.filter((hotel) => hotel.favorite);
+
+  if (sort === "default") {
+    sortedHotels.sort((a, b) => b.stars - a.stars);
+  } else if (sort === "price") {
+    sortedHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+  }
 
   return (
     <div className={styles.favorites}>
@@ -25,21 +33,9 @@ const Favorites = () => {
       </select>
 
       <ul className={styles.list}>
-        {sort === "default"
-          ? [...hotel]
-              .sort((a, b) => b?.stars - a?.stars)
-              .map((hotel) =>
-                hotel.favorite ? (
-                  <HotelItem key={hotel.hotelId} hotel={hotel} />
-                ) : null
-              )
-          : [...hotel]
-              .sort((a, b) => b?.priceAvg - a?.priceAvg)
-              .map((hotel) =>
-                hotel.favorite ? (
-                  <HotelItem key={hotel.hotelId} hotel={hotel} />
-                ) : null
-              )}
+        {sortedHotels.map((hotel) => (
+          <HotelItem key={hotel.hotelId} hotel={hotel} />
+        ))}
       </ul>
     </div>
   );
