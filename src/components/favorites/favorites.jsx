@@ -80,8 +80,6 @@ const Favorites = () => {
     }
   };
 
-  console.log(choice);
-
   return (
     <div className={styles.favorites}>
       <h2 className={styles.title}>Избранное</h2>
