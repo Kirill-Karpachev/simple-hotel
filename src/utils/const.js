@@ -2,7 +2,7 @@ import {
   dateFormat
 } from "./util";
 const currentDate = new Date()
-export const HOTEL_API = "http://engine.hotellook.com/api/v2/cache.json";
+export const HOTEL_API = "https://engine.hotellook.com/api/v2/cache.json";
 export const defaultLocation = {
   location: "Москва",
   checkIn: dateFormat(currentDate),
