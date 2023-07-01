@@ -11,7 +11,7 @@ import {
 import { parseDate } from "../../utils/util";
 
 const HotelItem = ({ hotel, main }) => {
-  const { formHotel } = useSelector((store) => store.hotel);
+  const { formHotel, favoritesHotel } = useSelector((store) => store.hotel);
 
   const dispatch = useDispatch();
   const arrStar = [1, 2, 3, 4, 5];
@@ -24,6 +24,18 @@ const HotelItem = ({ hotel, main }) => {
       dispatch({ type: DELETE_FAVORITES_HOTEL, payload: hotel?.hotelId });
     }
   };
+
+  favoritesHotel.map((item) => {
+    if (item.hotelId === hotel.hotelId) {
+      hotel = {
+        ...hotel,
+        favorite: true,
+      };
+      return hotel;
+    } else {
+      return hotel;
+    }
+  });
 
   return (
     <li className={styles.listItem}>
@@ -46,7 +58,7 @@ const HotelItem = ({ hotel, main }) => {
           <div className={styles.middle}>
             <p className={styles.text}>
               {parseDate(formHotel?.checkIn || "2022-06-23")}
-            </p>{" "}
+            </p>
             —<p className={styles.text}>{formHotel?.day} день</p>
           </div>
 

@@ -4,10 +4,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 
 const Favorites = () => {
-  const { hotel, favoritesHotel } = useSelector((store) => store.hotel);
+  const { favoritesHotel } = useSelector((store) => store.hotel);
   const [sort, setSort] = useState("default");
-
-  console.log(favoritesHotel);
 
   const handleChange = (e) => {
     setSort(e.target.value);
@@ -35,7 +33,7 @@ const Favorites = () => {
                   <HotelItem key={hotel.hotelId} hotel={hotel} />
                 ) : null
               )
-          : [...hotel]
+          : favoritesHotel
               .sort((a, b) => b?.priceAvg - a?.priceAvg)
               .map((hotel) =>
                 hotel.favorite ? (
