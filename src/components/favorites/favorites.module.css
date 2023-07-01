@@ -1,4 +1,7 @@
 .favorites {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   background-color: #fff;
   border-radius: 16px;
   padding: 32px;
@@ -11,14 +14,6 @@
   line-height: 28px;
   letter-spacing: 0em;
   margin: 0;
-}
-
-.select {
-  padding: 4px 8px 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #41522E;
-  color: #41522E;
-  margin: 32px 0;
 }
 
 .list {
@@ -43,4 +38,49 @@
 
 .list::-webkit-scrollbar-track {
   background: #E7E7E7;
+}
+
+.btns {
+  display: flex;
+  gap: 8px;
+}
+
+.imgDown {
+  opacity: 0.3;
+  transform: rotate(180deg);
+}
+
+.imgDownActive {
+  opacity: 1;
+}
+
+.imgUpUnActive {
+  opacity: 0.3;
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  background: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #41522E;
+  color: #41522E;
+}
+
+.btnUnActive {
+  opacity: .3;
+}
+
+.btnText {
+  padding: 0 9px 0 0;
+  margin: 0;
+}
+
+.imgs {
+  display: flex;
+  flex-direction: column;
+  margin-left: 9px;
 }
