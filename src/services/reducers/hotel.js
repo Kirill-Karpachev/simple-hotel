@@ -41,27 +41,12 @@ export const hotelReducer = (state = initialState, action) => {
     case ADD_FAVORITES_HOTEL: {
       return {
         ...state,
-        hotel: [...state.hotel].map(hotel => (
-          hotel.hotelId === action.payload.hotelId ? {
-            ...hotel,
-            favorite: true
-          } : hotel
-        )),
-        favoritesHotel: [...state.favoritesHotel, {
-          ...action.payload,
-          favorite: true
-        }]
+        favoritesHotel: [...state.favoritesHotel, action.payload]
       }
     }
     case DELETE_FAVORITES_HOTEL: {
       return {
         ...state,
-        hotel: [...state.hotel].map(hotel => (
-          hotel.hotelId === action.payload ? {
-            ...hotel,
-            favorite: false
-          } : hotel
-        )),
         favoritesHotel: [...state.favoritesHotel].filter(
           (hotel) => hotel.hotelId !== action.payload
         ),

@@ -20,10 +20,7 @@ function* getHotelsWorker({
     yield put({
       type: GET_HOTEL_SUCCESS,
       payload: {
-        data: data.map(hotel => ({
-          ...hotel,
-          favorite: false
-        })),
+        data,
         form
       }
     });
