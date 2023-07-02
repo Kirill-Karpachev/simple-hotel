@@ -1,0 +1,39 @@
+.imgDown {
+  opacity: 0.3;
+  transform: rotate(180deg);
+}
+
+.imgDownActive {
+  opacity: 1;
+}
+
+.imgUpUnActive {
+  opacity: 0.3;
+}
+
+.btn {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-family: Roboto;
+  background: 0;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1px solid #41522E;
+  color: #41522E;
+}
+
+.btnUnActive {
+  opacity: .3;
+}
+
+.btnText {
+  padding: 0 9px 0 0;
+  margin: 0;
+}
+
+.imgs {
+  display: flex;
+  flex-direction: column;
+  margin-left: 9px;
+}

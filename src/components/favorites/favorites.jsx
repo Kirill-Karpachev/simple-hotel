@@ -2,143 +2,49 @@ import styles from "./favorites.module.css";
 import HotelItem from "../hotel-item/hotel-item";
 import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
-import SelectImg from "../../images/select.svg";
+import ButtonSort from "../ui/button-sort/button-sort";
 
 const Favorites = () => {
   const { favoritesHotel } = useSelector((store) => store.hotel);
   const [sort, setSort] = useState();
   const [choice, setChoice] = useState("rateUp");
 
-  const handleClick = (e) => {
-    if (e.target.name === "rate") {
-      if (choice === "rateUp") {
-        setChoice("rateDown");
-      } else {
-        setChoice("rateUp");
-      }
-    } else {
-      if (choice === "priceUp") {
-        setChoice("priceDown");
-      } else {
-        setChoice("priceUp");
-      }
-    }
-  };
-
   useEffect(() => {
     let sortedHotels = favoritesHotel.filter((hotel) => hotel.favorite);
 
     if (choice === "rateUp") {
-      sortedHotels.sort(sortRateUp);
+      sortedHotels.sort((a, b) => a.stars - b.stars);
     }
     if (choice === "rateDown") {
-      sortedHotels.sort(sortRateDown);
+      sortedHotels.sort((a, b) => b.stars - a.stars);
     }
     if (choice === "priceUp") {
-      sortedHotels.sort(sortPriceUp);
+      sortedHotels.sort((a, b) => a.priceAvg - b.priceAvg);
     }
     if (choice === "priceDown") {
-      sortedHotels.sort(sortPriceDown);
+      sortedHotels.sort((a, b) => b.priceAvg - a.priceAvg);
     }
 
     setSort([...sortedHotels]);
   }, [choice, favoritesHotel]);
-
-  const sortPriceUp = (a, b) => {
-    if (a.priceAvg < b.priceAvg) {
-      return -1;
-    }
-    if (a.priceAvg > b.priceAvg) {
-      return 1;
-    }
-  };
-
-  const sortPriceDown = (a, b) => {
-    if (a.priceAvg < b.priceAvg) {
-      return 1;
-    }
-    if (a.priceAvg > b.priceAvg) {
-      return -1;
-    }
-  };
-
-  const sortRateUp = (a, b) => {
-    if (a.stars < b.stars) {
-      return -1;
-    }
-    if (a.stars > b.stars) {
-      return 1;
-    }
-  };
-
-  const sortRateDown = (a, b) => {
-    if (a.stars < b.stars) {
-      return 1;
-    }
-    if (a.stars > b.stars) {
-      return -1;
-    }
-  };
 
   return (
     <div className={styles.favorites}>
       <h2 className={styles.title}>Избранное</h2>
 
       <div className={styles.btns}>
-        <button
-          className={`${styles.btn} ${
-            choice === "rateUp" || choice === "rateDown"
-              ? ""
-              : styles.btnUnActive
-          }`}
-          name="rate"
-          onClick={handleClick}
-        >
-          Рейтинг
-          <div className={styles.imgs}>
-            <img
-              className={`${styles.imgUp} ${
-                choice === "rateUp" ? styles.imgUpUnActive : ""
-              }`}
-              src={SelectImg}
-              alt=""
-            />
-            <img
-              className={`${styles.imgDown} ${
-                choice === "rateDown" ? "" : styles.imgDownActive
-              }`}
-              src={SelectImg}
-              alt=""
-            />
-          </div>
-        </button>
-        <button
-          className={`${styles.btn} ${
-            choice === "priceUp" || choice === "priceDown"
-              ? ""
-              : styles.btnUnActive
-          }`}
-          name="price"
-          onClick={handleClick}
-        >
-          Цена
-          <section className={styles.imgs}>
-            <img
-              className={`${styles.imgUp} ${
-                choice === "priceUp" ? styles.imgUpUnActive : ""
-              }`}
-              src={SelectImg}
-              alt=""
-            />
-            <img
-              className={`${styles.imgDown} ${
-                choice === "priceDown" ? "" : styles.imgDownActive
-              }`}
-              src={SelectImg}
-              alt=""
-            />
-          </section>
-        </button>
+        <ButtonSort
+          choice={choice}
+          setChoice={setChoice}
+          name={"rate"}
+          text={"Рейтинг"}
+        />
+        <ButtonSort
+          choice={choice}
+          setChoice={setChoice}
+          name={"price"}
+          text={"Цена"}
+        />
       </div>
 
       <ul className={styles.list}>
