@@ -12,17 +12,21 @@ const Favorites = () => {
   useEffect(() => {
     let sortedHotels = favoritesHotel.filter((hotel) => hotel.favorite);
 
-    if (choice === "rateUp") {
-      sortedHotels.sort((a, b) => a.stars - b.stars);
-    }
-    if (choice === "rateDown") {
-      sortedHotels.sort((a, b) => b.stars - a.stars);
-    }
-    if (choice === "priceUp") {
-      sortedHotels.sort((a, b) => a.priceAvg - b.priceAvg);
-    }
-    if (choice === "priceDown") {
-      sortedHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+    switch (choice) {
+      case "rateUp":
+        sortedHotels.sort((a, b) => a.stars - b.stars);
+        break;
+      case "rateDown":
+        sortedHotels.sort((a, b) => b.stars - a.stars);
+        break;
+      case "priceUp":
+        sortedHotels.sort((a, b) => a.priceAvg - b.priceAvg);
+        break;
+      case "priceDown":
+        sortedHotels.sort((a, b) => b.priceAvg - a.priceAvg);
+        break;
+      default:
+        break;
     }
 
     setSort([...sortedHotels]);
