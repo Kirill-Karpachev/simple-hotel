@@ -54,4 +54,23 @@ export const parseDate = (date) => format(parse(date, 'yyyy-MM-dd', new Date(), 
 }), 'dd MMMM yyyy', {
   locale: ru
 })
+export const dayFormat = (day) => {
+  if (day === '1') {
+    return `${day} день`;
+  } else if (
+    day === '2' ||
+    day === '3' ||
+    day === '4'
+  ) {
+    return `${day} дня`;
+  } else {
+    return `${day} дней`;
+  }
+};
 
+export const priceFormat = (price) => {
+  let arrBase = price.toString().split('.')
+  let arrSecond = arrBase[0].toString().split('')
+  arrSecond.splice(-3, 0, ' ')
+  return arrSecond.join('')
+}

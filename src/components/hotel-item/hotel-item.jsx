@@ -1,41 +1,31 @@
-import styles from "./hotel-item.module.css";
-import Star from "../../images/star.svg";
-import StarFill from "../../images/star-fill.svg";
-import House from "../../images/house.png";
-import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
   ADD_FAVORITES_HOTEL,
   DELETE_FAVORITES_HOTEL,
 } from "../../services/actions/hotel";
-import { parseDate } from "../../utils/util";
+import styles from "./hotel-item.module.css";
+import Star from "../../images/star.svg";
+import StarFill from "../../images/star-fill.svg";
+import House from "../../images/house.png";
+import { dayFormat, parseDate, priceFormat } from "../../utils/util";
 
 const HotelItem = ({ hotel, main }) => {
-  const { formHotel, favoritesHotel } = useSelector((store) => store.hotel);
-
   const dispatch = useDispatch();
+  const { formHotel, favoritesHotel } = useSelector((store) => store.hotel);
   const arrStar = [1, 2, 3, 4, 5];
-  const price = useMemo(() => Math.round(hotel?.priceAvg), [hotel?.priceAvg]);
 
-  const handlerFavorite = () => {
-    if (!hotel?.favorite) {
-      dispatch({ type: ADD_FAVORITES_HOTEL, payload: hotel });
+  const isFavorite = favoritesHotel.some(
+    (item) => item.hotelId === hotel.hotelId
+  );
+
+  const handleFavorite = () => {
+    if (isFavorite) {
+      dispatch({ type: DELETE_FAVORITES_HOTEL, payload: hotel.hotelId });
     } else {
-      dispatch({ type: DELETE_FAVORITES_HOTEL, payload: hotel?.hotelId });
+      dispatch({ type: ADD_FAVORITES_HOTEL, payload: hotel });
     }
   };
-
-  favoritesHotel.map((item) => {
-    if (item.hotelId === hotel.hotelId) {
-      hotel = {
-        ...hotel,
-        favorite: true,
-      };
-      return hotel;
-    } else {
-      return hotel;
-    }
-  });
 
   return (
     <li className={styles.listItem}>
@@ -45,36 +35,37 @@ const HotelItem = ({ hotel, main }) => {
         </div>
         <div className={styles.item}>
           <div className={styles.top}>
-            <h3 className={styles.title}>{hotel?.hotelName}</h3>
-            <button className={styles.btn} onClick={handlerFavorite}>
+            <h3 className={styles.title}>{hotel.hotelName}</h3>
+            <button className={styles.btn} onClick={handleFavorite}>
               <span
                 className={`${styles.heart} ${
-                  hotel?.favorite ? styles.heartActive : ""
+                  isFavorite ? styles.heartActive : ""
                 }`}
               ></span>
             </button>
           </div>
 
           <div className={styles.middle}>
-            <p className={styles.text}>
-              {parseDate(formHotel?.checkIn)}
-            </p>
-            —<p className={styles.text}>{formHotel?.day} день</p>
+            <p className={styles.text}>{parseDate(formHotel?.checkIn)}</p>—
+            <p className={styles.text}>{dayFormat(formHotel.day)}</p>
           </div>
 
           <div className={styles.bottom}>
             <div className={styles.stars}>
               {arrStar.map((item) => {
-                if (hotel?.stars >= item) {
-                  return <img key={item} src={StarFill} alt="Звезда"></img>;
-                } else {
-                  return <img key={item} src={Star} alt="Звезда"></img>;
-                }
+                return (
+                  <img
+                    key={item}
+                    src={hotel.stars >= item ? StarFill : Star}
+                    alt="Звезда"
+                  ></img>
+                );
               })}
             </div>
 
             <p className={styles.price}>
-              <span className={styles.priceText}>Price:</span> {price} ₽
+              <span className={styles.priceText}>Price: </span>
+              {priceFormat(hotel.priceAvg)} ₽
             </p>
           </div>
         </div>
